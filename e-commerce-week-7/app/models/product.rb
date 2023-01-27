@@ -9,6 +9,7 @@ class Product < ApplicationRecord
 
   has_many :variants, dependent: :destroy
   has_many :ratings, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   has_and_belongs_to_many :users, join_table: 'users_products_read_status'
 end

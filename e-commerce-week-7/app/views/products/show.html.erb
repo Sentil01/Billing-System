@@ -1,7 +1,7 @@
 <% content_for :head do %>
-  <% unless @product.users.include?(current_user) %>
-    <%= javascript_pack_tag 'product', 'data-turbolinks-track': 'reload', defer: true %>
-  <% end %>
+  <%# unless @product.users.include?(current_user) %>
+    <%#= javascript_pack_tag 'product', 'data-turbolinks-track': 'reload', defer: true %>
+  <%# end %>
 <% end %>
 
 <div id="post" data-read-url="<%= read_category_product_path(@category, @product) %>">
@@ -33,6 +33,16 @@
     <h3>Add Rating:</h3>
     <%= render 'ratings/form', rating: @product.ratings.build %>
   </div>
+  <div>
+    <h2>Comments</h2>
+    <% @product.comments.each do|comment| %>
+       <%= comment.decription %>
+    <% end %>
+
+
+  </div>
+    <h3>Add Ratings</h3>
+           <%= link_to 'Add Comment',new_product_comment_path(@product) %>
 
   <%= link_to 'Variants', category_product_variants_path(@category, @product) %> |
 
