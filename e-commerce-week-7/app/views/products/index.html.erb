@@ -57,7 +57,7 @@
 
 <br><br>
 <% if @category.present? %>
- <%= link_to 'New Product', new_category_product_path(@category),data: {bs_toggle:"modal",bs_target:"newUserForm",remote: true} %> |
+ <%= link_to 'New Product', new_category_product_path(@category),data: {bs_toggle:"modal",bs_target:"#exampleModal",remote: true} %> |
   <%= link_to 'Back', category_path(@category) %>
 <% end %>
 
