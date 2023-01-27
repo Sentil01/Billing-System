@@ -1,4 +1,4 @@
-<%= form_with(model: [@category,product],local: false,:html => {:class => "form"}) do |form| %>
+<%= form_with(model: [@category,product],local: false) do |form| %>
   <div class="modal-body">
     <% if product.errors.any? %>
       <div id="error_explanation">
