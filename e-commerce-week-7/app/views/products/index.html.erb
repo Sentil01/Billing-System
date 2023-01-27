@@ -1,0 +1,60 @@
+<h1>Products</h1>
+<% if @products.length > 0 %>
+  <table>
+    <thead>
+    <tr>
+      <% unless @category.present? %>
+        <th>Category</th>
+      <% end %>
+
+      <th>Name</th>
+      <th>Description</th>
+      <th>Variants</th>
+      <th>Total Ratings</th>
+      <th>Average Rating</th>
+      <th>Status</th>
+
+      <th colspan="3"> Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <% unless @category.present? %>
+          <td><%= product.category.name %></td>
+        <% end %>
+
+        <td><%= product.name %></td>
+        <td><%= product.description %></td>
+        <td><%= product.variants.size %></td>
+        <td><%= product.ratings.size %></td>
+        <td><%= (product.ratings.average(:star) || 0.0).floor(1) %></td>
+        <td><%= product.users.include?(current_user) ? 'Read': 'Unread' %></td>
+
+        <td><%= link_to 'Show', category_product_path(product.category, product) %></td>
+
+        <% if can? :edit, product %>
+          <td><%= link_to 'Edit', edit_category_product_path(product.category, product) %></td>
+        <% end %>
+
+        <% if can? :destroy, product %>
+          <td><%= link_to 'Destroy', category_product_path(product.category, product), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+<% else %>
+  No products available
+<% end %>
+
+<br><br>
+<% if @category.present? %>
+  <%= link_to 'New Product', new_category_product_path(@category) %> |
+  <%= link_to 'Back', category_path(@category) %>
+<% end %>
+
+<br><br>
+<%= will_paginate @posts %>

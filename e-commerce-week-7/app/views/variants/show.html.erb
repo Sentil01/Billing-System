@@ -1,0 +1,12 @@
+<p>
+  <strong>Name:</strong>
+  <%= @variant.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @variant.price %>
+</p>
+
+<%= link_to 'Edit', edit_category_product_variant_path(@category, @product, @variant) %> |
+<%= link_to 'Back', category_product_variants_path(@category, @product) %>

@@ -1,0 +1,6 @@
+<h1>Editing Variant</h1>
+
+<%= render 'form', variant: @variant %>
+
+<%= link_to 'Show', category_product_variant_path(@category, @product, @variant) %> |
+<%= link_to 'Back', category_product_variants_path(@category, @product) %>

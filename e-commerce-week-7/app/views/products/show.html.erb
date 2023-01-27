@@ -1,0 +1,49 @@
+<% content_for :head do %>
+  <% unless @product.users.include?(current_user) %>
+    <%= javascript_pack_tag 'product', 'data-turbolinks-track': 'reload', defer: true %>
+  <% end %>
+<% end %>
+
+<div id="post" data-read-url="<%= read_category_product_path(@category, @product) %>">
+  <p>
+    <strong>Name:</strong>
+    <%= @product.name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @product.description %>
+  </p>
+
+  <p>
+    <strong>Category:</strong>
+    <%= @category.name %>
+  </p>
+
+  <p>
+    <strong>Ratings: </strong>
+    <% @ratings.each_pair do |star, count| %>
+      <span style="margin: 0 5px">
+        <%= "#{star}⭐(#{count})" %>
+      </span>
+    <% end %>
+  </p>
+
+  <div style="padding: 10px 0">
+    <h3>Add Rating:</h3>
+    <%= render 'ratings/form', rating: @product.ratings.build %>
+  </div>
+
+  <%= link_to 'Variants', category_product_variants_path(@category, @product) %> |
+
+  <% if can? :edit, @product %>
+    <%= link_to 'Edit', edit_category_product_path(@category, @product) %> |
+  <% end %>
+
+  <% if can? :destroy, @product %>
+    <%= link_to 'Destroy', category_product_path(@category, @product), method: :delete, data: { confirm: 'Are you sure?' } %>
+    |
+  <% end %>
+
+  <%= link_to 'Back', category_products_path(@category) %>
+</div>

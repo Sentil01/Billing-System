@@ -1,0 +1,19 @@
+<div>
+  <strong>Avatar:</strong><br />
+  <% if current_user.avatar.attached? %>
+    <%= image_tag(current_user.avatar, size: '100x100', style: 'border-radius: 50%') %>
+  <% else %>
+    No avatar found.
+  <% end %>
+</div>
+
+<div>
+  <strong>Email:</strong>
+  <%= current_user.email %>
+</div>
+
+<div>
+  <%= link_to 'Edit profile', edit_user_registration_path %> |
+  <%= link_to "Destroy account", registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete %> |
+  <%= link_to 'Logout', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
