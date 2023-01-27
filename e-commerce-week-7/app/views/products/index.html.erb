@@ -1,3 +1,8 @@
+<style>
+    .hide{
+        display: none;
+    }
+</style>
 <h1>Products</h1>
 <% if @products.length > 0 %>
   <table>
@@ -52,32 +57,35 @@
 
 <br><br>
 <% if @category.present? %>
- <%= link_to 'New Product', new_category_product_path(@category) %> |
+ <%= link_to 'New Product', new_category_product_path(@category),data: {bs_toggle:"modal",bs_target:"newUserForm",remote: true} %> |
   <%= link_to 'Back', category_path(@category) %>
 <% end %>
 
 
 
-
 <br><br>
 <%= will_paginate @posts %>
-<!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--  <div class="modal-dialog" role="document">-->
-<!--    <div class="modal-content">-->
-<!--      <div class="modal-header">-->
-<!--        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>-->
-<!--        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
-<!--          <span aria-hidden="true">&times;</span>-->
-<!--        </button>-->
-<!--      </div>-->
-<!--      <div class="newUserForm">-->
-        <%#= render 'form', product: @product %>
+<!-- Button trigger modal -->
+<!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+<!--  Launch demo modal-->
+<!--</button>-->
 
-<!--      </div>-->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="newUserForm">
+        <%= render "form", product: @product %>
+
+      </div>
 
 
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<%#= link_to "New post", params[:topic_id].present? ? new_topic_post_path(@topic) : new_post_path %>
-<%#= link_to "New Product", params[:category_id].present? ? new_category_post_path(@category) : new_product_path,class:"newbtn",data: {bs_toggle: 'modal',bs_target: '#exampleModal',remote: true} %>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,12 @@ class ProductsController < ApplicationController
                   @category.products.all
                 else
                   Product.all.includes(:category)
-                end).paginate(page: params[:page])
+                 end).paginate(page: params[:page])
+    if params[:category_id].present?
+      @product = @category.products.build
+    else
+      @product=Product.new
+    end
   end
 
   # GET /products/1 or /products/1.json
